@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Lexware_Task/Lexware_Task.iml" filepath="$PROJECT_DIR$/Lexware_Task/Lexware_Task.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Projekte.iml" filepath="$PROJECT_DIR$/.idea/Projekte.iml" />
     </modules>
   </component>
