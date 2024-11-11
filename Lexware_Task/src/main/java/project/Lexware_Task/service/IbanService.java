@@ -3,7 +3,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.Array;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -73,9 +72,9 @@ public class IbanService {
             log.info(content.toString());
             JSONObject bankDetails = new JSONObject(content.toString());
             //log.info(bankDetails.toString());
-            JSONObject bankData = bankDetails.getJSONObject("bankData");
+            //JSONObject bankData = bankDetails.getJSONObject("bankData");
             //log.info(bankData.toString());
-            String bank = bankData.getString("name");
+            //String bank = bankData.getString("name");
             //log.info(bank);
             // Antwort verarbeiten (hier als String zurückgegeben; JSON-Parsing wäre sinnvoll)
             return bankDetails;
