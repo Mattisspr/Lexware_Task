@@ -19,6 +19,10 @@ public class Controller {
         this.ibanService = ibanService;
     }
 
+    @GetMapping()
+    public void test() {
+        log.info("api funktioniert");
+    }
     @GetMapping("/{iban}")
     public String getBankByIban(@PathVariable String iban) {
         log.info(iban);
