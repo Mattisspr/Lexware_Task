@@ -15,7 +15,7 @@ import project.Lexware_Task.service.IbanService;
 @RequestMapping("/api/iban")
 public class Controller {
 
-    private static final Logger log = LoggerFactory.getLogger(IbanService.class);
+    private static final Logger log = LoggerFactory.getLogger(Controller.class);
 
     private final IbanService ibanService;
     @Autowired
@@ -23,10 +23,6 @@ public class Controller {
         this.ibanService = ibanService;
     }
 
-    @GetMapping()
-    public void test() {
-        log.info("api läuft");
-    }
     @GetMapping("/{iban}")
     public String getBankByIban(@PathVariable String iban) {
         log.info(iban);

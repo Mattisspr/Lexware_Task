@@ -25,30 +25,17 @@ public class IbanService {
 
     public String getBankByIban(String iban) {
         JSONObject ibanInformation = this.getIbanInformation(iban);
-        log.info(ibanInformation.toString());
-        this.validateIban(ibanInformation);
-        JSONObject bankData = ibanInformation.getJSONObject("bankData");
-        String bankName = bankData.getString("name");
-        log.info(bankName);
 
         Iban ibanInfo = new Iban();
-        ibanInfo.setBankName(bankData.getString("name"));
+        ibanInfo.setBankName(ibanInformation.getJSONObject("bankData").getString("name"));
         ibanInfo.setIban(ibanInformation.getString("iban"));
-        log.info(ibanInfo.toString());
+        log.info(ibanInfo.getBankName());
+
         ibanRepository.save(ibanInfo);
         List<Iban> ibanList= ibanRepository.findAll();
-        ibanList.forEach((iban1 -> log.info(iban1.getBankName() + " + " + iban1.getIban())));
-        return bankName;
-    }
+        ibanList.forEach((iban1 -> log.info("Iban: " + iban1.getIban() + " gehört zur Bank: " + iban1.getBankName())));
 
-    private void validateIban(JSONObject ibanInformation) {
-        if (ibanInformation.isEmpty()) {
-            throw new IllegalArgumentException("Fehler bei der Bankabfrage");
-        }
-        if (!ibanInformation.getBoolean("valid")) {
-            JSONArray message = ibanInformation.getJSONArray("messages");
-            throw new IllegalArgumentException(message.toString());
-        }
+        return ibanInfo.getBankName();
     }
 
     private JSONObject getIbanInformation(String iban) {
@@ -69,8 +56,8 @@ public class IbanService {
             in.close();
 
             log.info(content.toString());
-            JSONObject bankDetails = new JSONObject(content.toString());
-            return bankDetails;
+
+            return new JSONObject(content.toString());
         } catch (Exception e) {
             e.printStackTrace();
             return new JSONObject();
